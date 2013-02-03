@@ -44,13 +44,56 @@
     </div>
     <div class="row">
         <div class="span8">
-            <form class="well form-horizontal" action="register.php" method="post" accept-charset="UTF-8">
+            <!--  Display an error if they entered invalid credentials -->
+            <?php
+                if (isset($invalid))
+                {
+                    echo '<div class="alert alert-error">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>Invalid Information Procided!</strong> The information you provided is not valid
+                            please enter valid information.
+                          </div>';
+                }
+                elseif (isset($notmember))
+                {
+                    echo '<div id="notmember" class="alert alert-error">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>No registered club member found for that information!</strong> No registered club
+                            member was found matching the information provided, if you are a registered club member
+                            then please contact <a href="mailto:admin@cs-club.ca">admin@cs-club.ca</a>
+                          </div>';
+                }
+                elseif (isset($isactive))
+                {
+                    echo '<div id="active" class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>You are now active!</strong> Thank you, you have now been marked as active, your
+                            name will be submitted to the Student Association.
+                          </div>';
+                }
+                else
+                {
+                    echo '<div id="activeinfo" class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <p>
+                                Submit <strong>one or more</strong> of the following pieces of information about 
+                                yourself to nominate yourself as an active club member if you are <strong>already 
+                                a club member</strong>.
+                            </p>
+                            <p>
+                                You may only nominate yourself as an active club member if you are <strong>genuinely interested
+                                in the club</strong> and are <strong>currently enrolled at UOIT/DC</strong>.
+                            </p>
+                          </div>';
+                }
+            ?>
+            <form class="well form-horizontal" action="active.php" method="post" accept-charset="UTF-8">
                 <fieldset>
                     <!--  First & Last Name -->
                     <div class="control-group">
                         <label for="first_name" class="control-label">First Name:</label>                
                         <div class="controls">
-                            <input id="name" name="first_name" required type="text" maxlength="31" pattern="^(([A-Za-z]+)|\s{1}[A-Za-z]+)+$" placeholder="First name..."/>            
+                            <input id="first_name" name="first_name" required type="text" maxlength="31" pattern="^(([A-Za-z]+)|\s{1}[A-Za-z]+)+$" placeholder="First name..."/>            
                         </div>
                     </div>
                     <div class="control-group">
@@ -63,20 +106,20 @@
                     <div class="control-group">
                         <label for="student_number" class="control-label">Student Number:</label>               
                         <div class="controls">
-                            <input type="text" id="student_number" name="student_number" required maxlength="9" pattern="^\d{9}$" placeholder="100123456..."/>              
+                            <input type="text" id="student_number" name="student_number" maxlength="9" pattern="^\d{9}$" placeholder="100123456..."/>              
                         </div>
                     </div>
                     <!-- Enter Email Address-->
                     <div class="control-group">
-                        <label for="email" class="control-label" for="inputEmail">Email Address:</label>               
+                        <label for="email" class="control-label" >Email Address:</label>               
                         <div class="controls">
-                            <input type="text" id="email" name="email" required maxlength="63" pattern="^.+@(.+\..+)+$" placeholder="something@email.com..."/>              
+                            <input type="text" id="email" name="email" maxlength="63" pattern="^.+@(.+\..+)+$" placeholder="something@email.com..."/>              
                         </div>
                     </div>
                     <!-- Sign Up -->
                     <div class="control-group">
                         <div class="controls">
-                            <button type="submit" id="active_user" name="active_user" class="btn">I'm Active!</button>
+                            <button type="submit" id="active_user" name="active_user" class="btn btn-inverse">I'm Active!</button>
                         </div>
                     </div>
                 </fieldset>
