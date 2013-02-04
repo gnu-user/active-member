@@ -46,15 +46,15 @@
         <div class="span8">
             <!--  Display an error if they entered invalid credentials -->
             <?php
-                if (isset($invalid))
+                if (isset($_SESSION['invalid']))
                 {
                     echo '<div class="alert alert-error">
                             <button type="button" class="close" data-dismiss="alert">×</button>
-                            <strong>Invalid Information Procided!</strong> The information you provided is not valid
+                            <strong>Invalid Information Provided!</strong> The information you provided is not valid
                             please enter valid information.
                           </div>';
                 }
-                elseif (isset($notmember))
+                elseif (isset($_SESSION['notmember']))
                 {
                     echo '<div id="notmember" class="alert alert-error">
                             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -63,7 +63,7 @@
                             then please contact <a href="mailto:admin@cs-club.ca">admin@cs-club.ca</a>
                           </div>';
                 }
-                elseif (isset($isactive))
+                elseif (isset($_SESSION['isactive']))
                 {
                     echo '<div id="active" class="alert alert-success">
                             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -71,14 +71,21 @@
                             name will be submitted to the Student Association.
                           </div>';
                 }
+                elseif (isset($_SESSION['alreadyactive']))
+                {
+                    echo '<div id="alreadyactive" class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>You are already marked as active!</strong> Thank you, but you are already marked as active!
+                            Your name will be submitted to the Student Association.
+                          </div>';
+                }
                 else
                 {
                     echo '<div id="activeinfo" class="alert alert-info">
                             <button type="button" class="close" data-dismiss="alert">×</button>
                             <p>
-                                Submit <strong>one or more</strong> of the following pieces of information about 
-                                yourself to nominate yourself as an active club member if you are <strong>already 
-                                a club member</strong>.
+                                Submit <strong>the following pieces of information</strong> about yourself to nominate yourself
+                                as an active club member if you are <strong>already a club member</strong>.
                             </p>
                             <p>
                                 You may only nominate yourself as an active club member if you are <strong>genuinely interested
@@ -106,17 +113,10 @@
                     <div class="control-group">
                         <label for="student_number" class="control-label">Student Number:</label>               
                         <div class="controls">
-                            <input type="text" id="student_number" name="student_number" maxlength="9" pattern="^\d{9}$" placeholder="100123456..."/>              
+                            <input id="student_number" name="student_number" required type="text" maxlength="9" pattern="^\d{9}$" placeholder="100123456..."/>              
                         </div>
                     </div>
-                    <!-- Enter Email Address-->
-                    <div class="control-group">
-                        <label for="email" class="control-label" >Email Address:</label>               
-                        <div class="controls">
-                            <input type="text" id="email" name="email" maxlength="63" pattern="^.+@(.+\..+)+$" placeholder="something@email.com..."/>              
-                        </div>
-                    </div>
-                    <!-- Sign Up -->
+                    <!-- Submit as Active User -->
                     <div class="control-group">
                         <div class="controls">
                             <button type="submit" id="active_user" name="active_user" class="btn btn-inverse">I'm Active!</button>
