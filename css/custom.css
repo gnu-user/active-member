@@ -19,7 +19,7 @@
  */
 
 /* Fix the default font colour for alerts */
-.alert#activeinfo {
+.alert#activeinfo, .alert#alreadyactive {
     color: #505050;
 }
 
