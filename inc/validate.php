@@ -72,7 +72,7 @@ function valid_password($password)
  */
 function valid_first_name($first_name)
 {
-    if (preg_match('/^(([A-Za-z]+)|\s{1}[A-Za-z]+)+$/', $_POST["first_name"]) && strlen($_POST["first_name"]) < 32)
+    if (preg_match('/^(([A-Za-z]+)|\s{1}[A-Za-z]+)+$/', $first_name) && strlen($first_name) < 32)
     {
         return TRUE;
     }
@@ -90,7 +90,7 @@ function valid_first_name($first_name)
  */
 function valid_last_name($last_name)
 {
-    if (preg_match('/^(([A-Za-z]+)|\s{1}[A-Za-z]+)+$/', $_POST["last_name"]) && strlen($_POST["last_name"]) < 32)
+    if (preg_match('/^(([A-Za-z]+)|\s{1}[A-Za-z]+)+$/', $last_name) && strlen($last_name) < 32)
     {
         return TRUE;
     }
@@ -108,7 +108,7 @@ function valid_last_name($last_name)
  */
 function valid_student_num($student_number)
 {
-    if (preg_match('/^\d{9}$/', $_POST["student_number"]))
+    if (preg_match('/^\d{9}$/', $student_number))
     {
         return TRUE;
     }
@@ -126,7 +126,7 @@ function valid_student_num($student_number)
  */
 function valid_email($email)
 {
-    if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) && strlen($_POST["email"]) < 64)
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email) < 64)
     {
         return TRUE;
     }
