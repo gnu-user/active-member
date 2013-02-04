@@ -58,7 +58,18 @@ if (isset($_POST['first_name']) && isset($_POST['last_name'])
             /* Add the member to the active members list if they are not already added */
             if (! is_active($mysqli_conn, $access_account))
             {
+                /* Record the member as active! */
+                add_member($mysqli_conn, $first_name, $last_name, $access_account);
 
+                /* Member has been recorded as active, redirect to main page */
+                $_SESSION['isactive'] = "isactive";
+                header('Location: index.php');
+            }
+            else
+            {
+                /* Member has already been marked as active... */
+                $_SESSION['alreadyactive'] = "alreadyactive";
+                header('Location: index.php');
             }
         }
         else
